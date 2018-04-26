@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<localizationDictionary culture="en">
+  <texts>
+    <text name="CountGroup" value="Count of groups" />
+    <text name="CountStudent" value="Count of students" />
+    <text name="TitleGroup" value="Admin groups" />
+    <text name="TitleStudent" value="Admin students" />
+    <text name="GroupPage" value="Groups" />
+    <text name="StudentPage" value="Students" />
+    <text name="NewButton" value="New" />
+    <text name="AddButton" value="Add" />
+    <text name="NameLabel" value="Name" />
+    <text name="FullNameLabel" value="Full Name" />
+    <text name="CILabel" value="CI" />
+    <text name="AgeLabel" value="Age" />
+    <text name="GroupLabel" value="Group" />
+    <text name="ActionLabel" value="Actions" />
+    <text name="EditLabel" value="Edit" />
+    <text name="DeleteLabel" value="Delete" />
+    <text name="NoGroupLabel" value="No Group" />
+    <text name="GroupCreatedMessage" value="Group has been created successfully." />
+    <text name="GroupDeleteMessage" value="Group has been deleted successfully." />
+    <text name="GroupEditMessage" value="Group has been edited successfully." />
+    <text name="StudentCreatedMessage" value="Student has been created successfully." />
+    <text name="StudentDeleteMessage" value="Student has been deleted successfully." />
+    <text name="StudentDeleteMessageConfirm" value="The student will be deleted." />
+    <text name="QuestionConfirm" value="Are you sure?" />
+    <text name="StudentEditMessage" value="Student has been edited successfully." />
+  </texts>
+</localizationDictionary>

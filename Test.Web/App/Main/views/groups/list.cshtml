@@ -1,0 +1,56 @@
+﻿<div class="panel panel-default" ng-controller="test.views.group.list as vm">
+    <div class="panel-heading" style="position: relative;">
+        <div class="row">
+            <div class="col-xs-6 text-left">
+                <h3>
+                    @L("TitleGroup")
+                </h3>
+            </div>
+            <div class="col-xs-6 text-right">
+                <button class="btn btn-primary" ng-click="vm.setAddGroup()">@L("NewButton")</button>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div ng-show="vm.addGroup">
+            <form role="form" name="formGroup">
+                <div class="form-group" ng-class="{'has-error': formGroup.nameG.$invalid, 'has-success': formGroup.nameG.$valid}">
+                    <label for="inputName">@L("NameLabel")</label>
+                    <input id="inputName" type="text" class="form-control" placeholder="@L("NameLabel")" name="nameG" ng-model="vm.group.name" required>
+                </div>
+                <div ng-if="!vm.editGroup">
+                    <button class="btn btn-success" ng-disabled="formGroup.$invalid" ng-click="vm.addGroupF()">@L("AddButton")</button>
+                </div>
+                <div ng-if="vm.editGroup">
+                    <button class="btn btn-success" ng-disabled="formGroup.$invalid" ng-click="vm.editGroupF()">@L("EditLabel")</button>
+                </div>
+            </form>
+        </div>
+        <div ng-show="!vm.addGroup">
+            <div ng-if="vm.groups.length == 0">
+                <p>
+                    @L("CountGroup") - <span>{{vm.getGroupCountText()}}</span>
+                </p>
+            </div>
+            <div ng-if="vm.groups.length != 0">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>@L("NameLabel")</th>
+                            <th class="text-right">@L("ActionLabel")</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="group in vm.groups">
+                            <td>{{group.name}}</td>
+                            <td class="text-right">
+                                <button class="btn btn-primary" ng-click="vm.enableEditGroup($index)">@L("EditLabel")</button>
+                                <button class="btn btn-primary" ng-click="vm.deleteGroup($index)">@L("DeleteLabel")</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

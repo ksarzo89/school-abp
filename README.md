@@ -1,2 +1,0 @@
-# school-abp
-school abp 
