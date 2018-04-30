@@ -3,13 +3,21 @@
   <texts>
     <text name="CountGroup" value="Count of groups" />
     <text name="CountStudent" value="Count of students" />
-    <text name="TitleGroup" value="Admin groups" />
-    <text name="TitleStudent" value="Admin students" />
+    <text name="TitleGroup" value="Group List" />
+    <text name="TitleStudent" value="Student List" />
+    <text name="CreateNewGroup" value="Create a new group" />
+    <text name="CreateNewStudent" value="Create a new student" />
+    <text name="EditGroup" value="Edit group" />
+    <text name="EditStudent" value="Edit student" />
     <text name="GroupPage" value="Groups" />
     <text name="StudentPage" value="Students" />
     <text name="NewButton" value="New" />
     <text name="AddButton" value="Add" />
+    <text name="SaveButton" value="Save" />
+    <text name="SavingWithThreeDot" value="Saving..." />
+    <text name="CancelLabel" value="Cancel" />
     <text name="NameLabel" value="Name" />
+    <text name="AllLabel" value="All" />
     <text name="FullNameLabel" value="Full Name" />
     <text name="CILabel" value="CI" />
     <text name="AgeLabel" value="Age" />
@@ -23,8 +31,10 @@
     <text name="GroupEditMessage" value="Group has been edited successfully." />
     <text name="StudentCreatedMessage" value="Student has been created successfully." />
     <text name="StudentDeleteMessage" value="Student has been deleted successfully." />
-    <text name="StudentDeleteMessageConfirm" value="The student will be deleted." />
-    <text name="QuestionConfirm" value="Are you sure?" />
+    <text name="AreYouSureMessage" value="Are you sure?" />
+    <text name="AreYouSureToDeleteGroup" value="The group {0} will be delete?" />
+    <text name="AreYouSureToDeleteStudent" value="The student {0} will be delete?" />
     <text name="StudentEditMessage" value="Student has been edited successfully." />
+    <text name="GroupTotalMessage" value="The school has {0} groups." />
   </texts>
 </localizationDictionary>

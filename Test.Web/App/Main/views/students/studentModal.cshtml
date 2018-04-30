@@ -1,0 +1,33 @@
+<div>
+    <form name="studentForm" role="form" novalidate class="form-validation">
+        <div class="modal-header">
+            <h4 class="modal-title">
+                <span ng-if="addStudentShow">@L("CreateNewStudent")</span>
+                <span ng-if="!addStudentShow">@L("EditStudent")</span>
+            </h4>
+        </div>
+        <div class="modal-body">
+            <div class="form-group" ng-class="{'has-error': studentForm.nameS.$invalid, 'has-success': studentForm.nameS.$valid}">
+                <label for="inputName">@L("FullNameLabel")</label>
+                <input id="inputName" type="text" class="form-control" placeholder="@L("FullNameLabel")" name="nameS" ng-model="student.fullName" required>
+            </div>
+            <div class="form-group" ng-class="{'has-error': studentForm.ciS.$invalid, 'has-success': studentForm.ciS.$valid}">
+                <label for="inputCI">@L("CILabel")</label>
+                <input id="inputCI" type="number" class="form-control" placeholder="@L("CILabel")" name="ciS" ng-model="student.ci" min="10000000000" max="99999999999" required>
+            </div>
+            <div class="form-group" ng-class="{'has-error': studentForm.ageS.$invalid, 'has-success': studentForm.ageS.$valid}">
+                <label for="inputAge">@L("AgeLabel")</label>
+                <input id="inputAge" type="number" class="form-control" placeholder="@L("AgeLabel")" name="ageS" ng-model="student.age" min="5" max="80" required>
+            </div>
+            <div class="form-group">
+                <select id="inputAssignedGroup" class="form-control" ng-model="student.assignedGroupId" ng-options="group.id as group.name for group in groups" required>
+                    <option value="">@L("GroupLabel")</option>
+                </select>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button ng-disabled="vm.saving" type="button" class="btn btn-default" ng-click="vm.cancel()">@L("CancelLabel")</button>
+            <button type="submit" button-busy="vm.saving" busy-text="@L("SavingWithThreeDot")" class="btn btn-primary blue" ng-click="vm.save()" ng-disabled="studentForm.$invalid"><i class="fa fa-save"></i> <span>@L("SaveButton")</span></button>
+        </div>
+    </form>
+</div>

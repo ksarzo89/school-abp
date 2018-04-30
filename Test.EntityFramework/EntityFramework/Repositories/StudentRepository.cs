@@ -18,21 +18,14 @@ namespace Test.EntityFramework.Repositories
 
             if (assignedGroupId.HasValue)
             {
-                query = query.Where(student => student.AssignedGroup.Id == assignedGroupId.Value);
+                query = query.
+                    Where(student => student.AssignedGroup.Id == assignedGroupId.Value);
             }
 
             return query
-                .Include(task => task.AssignedGroup)
+                .Include(student => student.AssignedGroup)
+                .OrderBy(student => student.Age)
                 .ToList();
-        }
-
-        public List<Student.Student> GetAllWithOutGroup()
-        {
-            var query = GetAll();
-           
-            query = query.Where(student => !student.AssignedGroupId.HasValue);
-
-            return query.ToList();
         }
     }
 }

@@ -27,6 +27,7 @@
             confirm: {
                 icon: 'warning',
                 title: 'Are you sure?',
+                showCancelButton: true,
                 buttons: ['Cancel', 'Yes']
             }
         }
@@ -51,7 +52,7 @@
         );
 
         return $.Deferred(function ($dfd) {
-            sweetAlert(opts).then(function () {
+            sweetAlert(opts, function () {
                 $dfd.resolve();
             });
         });
@@ -92,7 +93,7 @@
         );
 
         return $.Deferred(function ($dfd) {
-            sweetAlert(opts).then(function (isConfirmed) {
+            sweetAlert(opts, function (isConfirmed) {
                 callback && callback(isConfirmed);
                 $dfd.resolve(isConfirmed);
             });

@@ -1,0 +1,23 @@
+<div>
+    <form name="groupForm" role="form" novalidate class="form-validation">
+        <div class="modal-header">
+            <h4 class="modal-title">
+                <span ng-if="addGroupShow">@L("CreateNewGroup")</span>
+                <span ng-if="!addGroupShow">@L("EditGroup")</span>
+            </h4>
+        </div>
+        <div class="modal-body">
+
+            <!--<div class="form-group form-md-line-input form-md-floating-label no-hint">-->
+            <div class="form-group" ng-class="{'has-error': groupForm.Name.$invalid, 'has-success': groupForm.Name.$valid}">
+                <label for="Name">@L("NameLabel")</label>
+                <input class="form-control" type="text"  placeholder="@L("NameLabel")" name="Name" ng-model="group.name" required>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <button ng-disabled="vm.saving" type="button" class="btn btn-default" ng-click="vm.cancel()">@L("CancelLabel")</button>
+            <button type="submit" button-busy="vm.saving" busy-text="@L("SavingWithThreeDot")" class="btn btn-primary blue" ng-click="vm.save()" ng-disabled="groupForm.$invalid"><i class="fa fa-save"></i> <span>@L("SaveButton")</span></button>
+        </div>
+    </form>
+</div>

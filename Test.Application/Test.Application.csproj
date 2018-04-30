@@ -53,6 +53,10 @@
     <Reference Include="Castle.Windsor, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\packages\Castle.Windsor.4.1.0\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\Tecnologias\ASP.NET\proyectos\Vidly\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="JetBrains.Annotations, Version=11.1.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
       <HintPath>..\packages\JetBrains.Annotations.11.1.0\lib\net20\JetBrains.Annotations.dll</HintPath>
     </Reference>
@@ -182,14 +186,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Group\Dtos\GetAllGroupOutput.cs" />
     <Compile Include="Group\Dtos\GroupDto.cs" />
     <Compile Include="Group\Dtos\UpdateGroupInput.cs" />
     <Compile Include="Group\GroupAppService.cs" />
     <Compile Include="Group\IGroupAppService.cs" />
     <Compile Include="Student\Dtos\UpdateStudentInput.cs" />
     <Compile Include="Student\Dtos\GeStudentsInput.cs" />
-    <Compile Include="Student\Dtos\GetStudentsOutput.cs" />
     <Compile Include="Student\StudentAppService .cs" />
     <Compile Include="Student\Dtos\StudentDto.cs" />
     <Compile Include="Student\Dtos\CreateStudentInput.cs" />

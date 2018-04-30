@@ -1,8 +1,10 @@
 ﻿using Abp.Application.Services;
+using Abp.Application.Services.Dto;
 using Abp.AutoMapper;
 using Abp.Domain.Repositories;
 using AutoMapper;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Test.Student.Dtos;
 
@@ -19,48 +21,35 @@ namespace Test.Student
             _groupRepository = groupRepository;
         }
 
-        public void CreateStudent(CreateStudentInput input)
+        public async Task CreateStudent(CreateStudentInput input)
         {
-            Logger.Info("Creating a student for input: " + input);
+            var group = _groupRepository.Get(input.AssignedGroupId);
 
-            var student = new Student { FullName = input.FullName,  CI = input.CI, Age = input.Age, };
+            var student = input.MapTo<Student>();
+            group.Students.Add(student);
 
-            if (input.AssignedGroupId.HasValue)
-            {
-                student.AssignedGroupId = input.AssignedGroupId.Value;
-            }
-
-            _studentRepository.Insert(student);
+            await CurrentUnitOfWork.SaveChangesAsync();
         }
 
-        public void DeleteStudent(int idStudent)
+        public async Task DeleteStudent(int idStudent)
         {
-            _studentRepository.Delete(idStudent);
+            await _studentRepository.DeleteAsync(idStudent);
         }
 
-        public async Task<GetStudentsOutput> GetAllStudents()
+        public IListResult<StudentDto> GetAllStudents()
         {
-            var students = await _studentRepository.GetAllListAsync();
-            return new GetStudentsOutput
-            {
-                Students = students.MapTo<List<StudentDto>>()
-            };
+            var students = _studentRepository.GetAll().OrderBy(s => s.FullName).ToList();
+            return new ListResultDto<StudentDto>(students.MapTo<List<StudentDto>>());
         }
 
-        public GetStudentsOutput GetStudents(GeStudentsInput input)
+        public IListResult<StudentDto> GetStudents(GeStudentsInput input)
         {
-            var tasks = _studentRepository.GetAllWithGroup(input.AssignedGroupId);
-
-            return new GetStudentsOutput
-            {
-                Students = Mapper.Map<List<StudentDto>>(tasks)
-            };
+            var students = _studentRepository.GetAllWithGroup(input.AssignedGroupId).ToList();
+            return new ListResultDto<StudentDto>(students.MapTo<List<StudentDto>>());
         }
 
         public void UpdateStudent(UpdateStudentInput input)
         {
-            Logger.Info("Updating a student for input: " + input);
-
             var student = _studentRepository.Get(input.StudentId);
 
             if (input.FullName != "")
@@ -72,8 +61,10 @@ namespace Test.Student
             if (input.Age.HasValue)
                 student.Age = input.Age.Value;
 
-            if(input.AssignedGroupId.HasValue)
+            if (input.AssignedGroupId.HasValue)
                 student.AssignedGroup = _groupRepository.Load(input.AssignedGroupId.Value);
+            else
+                student.AssignedGroup = null;
         }
     }
 }

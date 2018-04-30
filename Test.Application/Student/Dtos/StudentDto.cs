@@ -4,7 +4,7 @@ using Abp.AutoMapper;
 namespace Test.Student.Dtos
 {
     [AutoMapFrom(typeof(Student))]
-    public class StudentDto : EntityDto
+    public class StudentDto : CreationAuditedEntityDto
     {
         public string FullName { get; set; }
 
@@ -14,6 +14,6 @@ namespace Test.Student.Dtos
 
         public string AssignedGroupName { get; set; }
 
-        public int? AssignedGroupId { get; set; }
+        public int AssignedGroupId { get; set; }
     }
 }

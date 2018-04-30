@@ -3,13 +3,21 @@
   <texts>
     <text name="CountGroup" value="Cantidad de grupos" />
     <text name="CountStudent" value="Cantidad de estudiantes" />
-    <text name="TitleGroup" value="Administrar grupos" />
-    <text name="TitleStudent" value="Administrar estudiantes" />
+    <text name="TitleGroup" value="Listado de Grupos" />
+    <text name="TitleStudent" value="Listado de Estudiantes" />
+    <text name="CreateNewGroup" value="Crear un nuevo grupo" />
+    <text name="CreateNewStudent" value="Crear un nuevo estudiante" />
+    <text name="EditGroup" value="Editar grupo" />
+    <text name="EditStudent" value="Editar estudiante" />
     <text name="GroupPage" value="Grupos" />
     <text name="StudentPage" value="Estudiantes" />
     <text name="NewButton" value="Nuevo" />
     <text name="AddButton" value="Adicionar" />
+    <text name="SaveButton" value="Salvar" />
+    <text name="SavingWithThreeDot" value="Salvando..." />
     <text name="NameLabel" value="Nombre" />
+    <text name="CancelLabel" value="Cancelar" />
+    <text name="AllLabel" value="Todos" />
     <text name="FullNameLabel" value="Nombre y apellidos" />
     <text name="CILabel" value="CI" />
     <text name="AgeLabel" value="Edad" />
@@ -23,8 +31,10 @@
     <text name="GroupEditMessage" value="El grupo fue editado satisfactoriamente." />
     <text name="StudentCreatedMessage" value="El estudiante fue creado satisfactoriamente." />
     <text name="StudentDeleteMessage" value="El estudiante fue eliminado satisfactoriamente." />
-    <text name="StudentDeleteMessageConfirm" value="El estudiante será eliminado." />
-    <text name="QuestionConfirm" value="Está seguro?" />
+    <text name="AreYouSureMessage" value="Está seguro?" />
+    <text name="AreYouSureToDeleteGroup" value="El grupo {0} será eliminado." />
+    <text name="AreYouSureToDeleteStudent" value="El estudiante {0} será eliminado." />
     <text name="StudentEditMessage" value="El estudiante fue editado satisfactoriamente." />
+    <text name="GroupTotalMessage" value="La escuela tiene {0} grupos." />
   </texts>
 </localizationDictionary>

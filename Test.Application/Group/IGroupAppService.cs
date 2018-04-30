@@ -1,4 +1,5 @@
 ﻿using Abp.Application.Services;
+using Abp.Application.Services.Dto;
 using System.Threading.Tasks;
 using Test.Group.Dtos;
 
@@ -6,12 +7,12 @@ namespace Test.Group
 {
     public interface IGroupAppService : IApplicationService
     {
-        Task<GetAllGroupOutput> GetAllGroup();
+        IListResult<GroupDto> GetAllGroup();
 
-        void CreateGroup(GroupDto input);
+        Task CreateGroup(GroupDto input);
 
         void UpdateGroup(UpdateGroupInput input);
 
-        void DeleteGroup(int idGroup);
+        Task DeleteGroup(int idGroup);
     }
 }

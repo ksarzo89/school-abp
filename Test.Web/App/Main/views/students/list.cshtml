@@ -1,45 +1,30 @@
-﻿<div class="panel panel-default" ng-controller="test.views.students.list as vm">
-    <div class="panel-heading" style="position: relative;">
-        <div class="row">
-            <div class="col-xs-6 text-left">
-                <h3>
-                    @L("TitleStudent")
-                </h3>
+﻿<div ng-controller="test.views.students.list as vm">
+    <div class="row margin-bottom-5">
+        <div class="col-xs-6  text-left">
+            <div class="page-head">
+                <div class="page-title">
+                    <h1>
+                        <span>@L("TitleStudent")</span>
+                    </h1>
+                </div>
             </div>
-            <div class="col-xs-6 text-right">
-                <button class="btn btn-primary" ng-click="vm.setAddStudent()">@L("NewButton")</button>
-            </div>
+        </div>
+        <div class="col-xs-6 text-right">
+            <button class="btn btn-primary blue" ng-click="vm.addStudent()"><i class="fa fa-plus"></i> @L("CreateNewStudent")</button>
         </div>
     </div>
-    <div class="panel-body">
-        <div ng-show="vm.addStudent">
-            <form role="form" name="formStudent">
-                <div class="form-group" ng-class="{'has-error': formStudent.nameS.$invalid, 'has-success': formStudent.nameS.$valid}">
-                    <label for="inputName">@L("FullNameLabel")</label>
-                    <input id="inputName" type="text" class="form-control" placeholder="@L("FullNameLabel")" name="nameS" ng-model="vm.student.fullName" required>
-                </div>
-                <div class="form-group" ng-class="{'has-error': formStudent.ciS.$invalid, 'has-success': formStudent.ciS.$valid}">
-                    <label for="inputCI">@L("CILabel")</label>
-                    <input id="inputCI" type="number" class="form-control" placeholder="@L("CILabel")" name="ciS" ng-model="vm.student.ci" required>
-                </div>
-                <div class="form-group" ng-class="{'has-error': formStudent.ageS.$invalid, 'has-success': formStudent.ageS.$valid}">
-                    <label for="inputAge">@L("AgeLabel")</label>
-                    <input id="inputAge" type="number" class="form-control" placeholder="@L("AgeLabel")" name="ageS" ng-model="vm.student.age" required>
-                </div>
-                <div class="form-group">
-                    <select id="inputAssignedGroup" class="form-control" ng-model="vm.student.assignedGroupId" ng-options="group.id as group.name for group in vm.groups">
-                        <option value="">@L("GroupLabel")</option>
+    <div class="portlet light">
+        <div class="portlet-body">
+            <div row margin-bottom-5>
+                <div class="col-xs-12 text-right">
+                    <select id="idGroup" ng-model="groupSelect" ng-options="group.id as group.name for group in groups">
+                        <option value="">@L("AllLabel")</option>
                     </select>
+                    <hr>
                 </div>
-                <div ng-if="!vm.editStudent">
-                    <button class="btn btn-success" ng-disabled="formStudent.$invalid" ng-click="vm.addStudentF()">@L("AddButton")</button>
-                </div>
-                <div ng-if="vm.editStudent">
-                    <button class="btn btn-success" ng-disabled="formStudent.$invalid" ng-click="vm.editStudentF()">@L("EditLabel")</button>
-                </div>
-            </form>
-        </div>
-        <div ng-show="!vm.addStudent">
+            </div>
+
+
             <div ng-if="vm.students.length == 0">
                 <p>
                     @L("CountStudent") - <span>{{vm.getStudentCountText()}}</span>
@@ -66,11 +51,14 @@
                             <td>{{student.age}}</td>
                             <td>
                                 <p ng-show="student.assignedGroupId">{{student.assignedGroupName}}</p>
-                                <p ng-show="!student.assignedGroupId">@L("NoGroupLabel")</p>
                             </td>
                             <td class="text-right">
-                                <button class="btn btn-primary" ng-click="vm.enableEditStudent($index)">@L("EditLabel")</button>
-                                <button class="btn btn-primary" ng-click="vm.deleteStudent($index)">@L("DeleteLabel")</button>
+                                <button ng-click="vm.editStudent($index)" title="@L("EditLabel")" class="btn btn-circle">
+                                    <i class="fa fa-pencil"></i>
+                                </button>
+                                <button ng-click="vm.deleteStudent($index)" title="@L("DeleteLabel")" class="btn btn-circle">
+                                    <i class="fa fa-trash"></i>
+                                </button>
                             </td>
                         </tr>
                     </tbody>

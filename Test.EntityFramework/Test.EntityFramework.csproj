@@ -198,6 +198,18 @@
     <Compile Include="Migrations\201804220102348_InitialCreate.Designer.cs">
       <DependentUpon>201804220102348_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201804290234099_AddRequired.cs" />
+    <Compile Include="Migrations\201804290234099_AddRequired.Designer.cs">
+      <DependentUpon>201804290234099_AddRequired.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804290301324_AddListStudents.cs" />
+    <Compile Include="Migrations\201804290301324_AddListStudents.Designer.cs">
+      <DependentUpon>201804290301324_AddListStudents.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201804290337550_AddOtherType.cs" />
+    <Compile Include="Migrations\201804290337550_AddOtherType.Designer.cs">
+      <DependentUpon>201804290337550_AddOtherType.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="TestDataModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -215,6 +227,15 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201804220102348_InitialCreate.resx">
       <DependentUpon>201804220102348_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804290234099_AddRequired.resx">
+      <DependentUpon>201804290234099_AddRequired.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804290301324_AddListStudents.resx">
+      <DependentUpon>201804290301324_AddListStudents.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201804290337550_AddOtherType.resx">
+      <DependentUpon>201804290337550_AddOtherType.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

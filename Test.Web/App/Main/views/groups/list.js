@@ -3,32 +3,26 @@
 
     var controllerId = 'test.views.group.list';
     app.controller(controllerId, [
-        '$scope', 'abp.services.app.group',
-        function ($scope, groupService) {
+        '$scope', '$uibModal', '$interval', 'abp.services.app.group',
+        function ($scope, $uibModal, $interval, groupService) {
             var vm = this;
 
             vm.localize = abp.localization.getSource('Test');
 
             vm.groups = [];
 
-            vm.addGroup = false;
+            $scope.addGroupShow = false;
 
-            vm.editGroup = false;
-
-            vm.group = {
+            $scope.group = {
                 groupId: 0,
                 name: ''
             };
-
-            abp.ui.setBusy(null, groupService.getAllGroup().then(function (data) {
-                vm.groups = data.data.groups;
-            }));
 
             vm.getGroupList = function () {
                 abp.ui.setBusy(
                     null,
                     groupService.getAllGroup().then(function (data) {
-                        vm.groups = data.data.groups;
+                        vm.groups = data.data.items;
                     })
                 );
             };
@@ -37,57 +31,58 @@
                 return abp.utils.formatString(vm.groups.length);
             };
 
-            vm.setAddGroup = function () {
-                vm.addGroup = true;
-                vm.editGroup = false;
-                vm.group.name = '';
-                vm.group.id = 0;
+            vm.openGroupModal = function () {
+                var modalInstance = $uibModal.open({
+                    templateUrl: '~/App/Main/views/groups/groupModal.cshtml',
+                    controller: 'test.views.group.groupModal as vm',
+                    scope: $scope,
+                    backdrop: 'static'
+                });
+
+                modalInstance.result.then(function () {
+                    vm.getGroupList();
+                });
             };
 
-            vm.addGroupF = function () {
-                abp.ui.setBusy(
-                    null,
-                    groupService.createGroup(
-                        vm.group
-                    ).then(function () {
-                        vm.addGroup = false;
-                        vm.getGroupList();
-                        abp.notify.info(abp.utils.formatString(vm.localize("GroupCreatedMessage")));
-                    })
-                );
-            };
+            vm.addGroup = function () {
+                $scope.group.groupId = null;
+                $scope.group.name = '';
+                $scope.addGroupShow = true;
+
+                vm.openGroupModal();
+            }
 
             vm.deleteGroup = function (index) {
-                abp.ui.setBusy(
-                    null,
-                    groupService.deleteGroup(vm.groups[index].id)
-                        .then(function () {
-                            vm.getGroupList();
-                            abp.notify.info(abp.utils.formatString(vm.localize("GroupDeleteMessage")));
-                        })
+                abp.message.confirm(
+                    vm.localize('AreYouSureToDeleteGroup', vm.groups[index].name),
+                    vm.localize('AreYouSureMessage'),
+                    function (isConfirmed) {
+                        if (isConfirmed) {
+                            groupService.deleteGroup(vm.groups[index].id).then(function () {
+                                abp.notify.success(vm.localize('GroupDeleteMessage'));
+                                vm.getGroupList();
+                            });
+                        }
+                    }
                 );
             };
 
-            vm.enableEditGroup = function (index) {
-                vm.group.name = vm.groups[index].name;
-                vm.group.groupId = vm.groups[index].id;
-                vm.addGroup = true;
-                vm.editGroup = true;
+            vm.editGroup = function (index) {
+                $scope.group.name = vm.groups[index].name;
+                $scope.group.groupId = vm.groups[index].id;
+                $scope.addGroupShow = false;
+
+                vm.openGroupModal();
             };
 
-            vm.editGroupF = function () {
-                abp.ui.setBusy(
-                    null,
-                    groupService.updateGroup(
-                        vm.group
-                    ).then(function () {
-                        vm.addGroup = false;
-                        vm.editGroup = false;
-                        vm.getGroupList();
-                        abp.notify.info(abp.utils.formatString(vm.localize("GroupEditMessage")));
-                    })
-                );
-            };
+            vm.showGroupCount = function () {
+                abp.notify.info(vm.localize('GroupTotalMessage', vm.groups.length));
+            }
+
+            vm.getGroupList();
+
+            $interval(function () { vm.showGroupCount(); }, 60000);
+
         }
     ]);
 })();

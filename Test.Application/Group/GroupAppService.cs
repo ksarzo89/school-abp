@@ -1,7 +1,9 @@
-﻿using Abp.AutoMapper;
+﻿using Abp.Application.Services.Dto;
+using Abp.AutoMapper;
 using Abp.Domain.Repositories;
-using Castle.Core.Logging;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
 using System.Threading.Tasks;
 using Test.Group.Dtos;
 
@@ -11,22 +13,20 @@ namespace Test.Group
     {
         private readonly IRepository<Group> _groupRepository;
 
-        //ABP provides that we can directly inject IRepository<Person> (without creating any repository class)
         public GroupAppService(IRepository<Group> groupRepository)
         {
             _groupRepository = groupRepository;
         }
 
-        public void CreateGroup(GroupDto input)
+        public async Task CreateGroup(GroupDto input)
         {
-            var group = new Group { Name = input.Name };
-
-            _groupRepository.Insert(group);
+            var group = input.MapTo<Group>();
+            await _groupRepository.InsertAsync(group);
         }
 
-        public void DeleteGroup(int idGroup)
+        public async Task DeleteGroup(int idGroup)
         {
-            _groupRepository.Delete(idGroup);
+            await _groupRepository.DeleteAsync(idGroup);
         }
 
         public void UpdateGroup(UpdateGroupInput input)
@@ -37,13 +37,14 @@ namespace Test.Group
                 group.Name = input.Name;
         }
 
-        public async Task<GetAllGroupOutput> GetAllGroup()
+        public IListResult<GroupDto> GetAllGroup()
         {
-            var groups = await _groupRepository.GetAllListAsync();
-            return new GetAllGroupOutput
-            {
-                Groups = groups.MapTo<List<GroupDto>>()
-            };
+            var groups = _groupRepository
+                .GetAll()
+                .Include(g => g.Students)
+                .OrderBy(g => g.Name)
+                .ToList();
+            return new ListResultDto<GroupDto>(groups.MapTo<List<GroupDto>>());
         }
     }
 }
